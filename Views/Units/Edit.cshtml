@@ -1,0 +1,80 @@
+﻿@model PMApp.Models.Unit
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+    <div class="reportHeader">
+        <h1>
+            <img src="~/img/door.jpg" alt="Repair Icon" width="55" height="60" />
+            Unit @Model.Unit_Number
+        </h1>
+    </div>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="UID" />
+            <div class="form-group">
+                <label asp-for="Unit_Number" class="control-label"></label>
+                <input readonly asp-for="Unit_Number" class="form-control" />
+                <span asp-validation-for="Unit_Number" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rent_Amount" class="control-label"></label>
+                <input asp-for="Rent_Amount" class="form-control" />
+                <span asp-validation-for="Rent_Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bedroom" class="control-label"></label>
+                <input asp-for="Bedroom" class="form-control" />
+                <span asp-validation-for="Bedroom" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Bath" class="control-label"></label>
+                <input asp-for="Bath" class="form-control" />
+                <span asp-validation-for="Bath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Square_footage" class="control-label"></label>
+                <input asp-for="Square_footage" class="form-control" />
+                <span asp-validation-for="Square_footage" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="BuildingId" class="control-label"></label>
+                <select asp-for="BuildingId" class="form-control" asp-items="ViewBag.BuildingId"></select>
+            </div>
+            <div style="display:none" class="form-group">
+                <label asp-for="ReservedBy" class="control-label"></label>
+                <input readonly asp-for="ReservedBy" class="form-control" />
+                <span asp-validation-for="ReservedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Occupied" class="control-label"></label>
+                <input readonly asp-for="Occupied" class="form-control" />
+                <span asp-validation-for="Occupied" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Ready_to_rent" class="control-label"></label>
+                <input readonly asp-for="Ready_to_rent" class="form-control" />
+                <span asp-validation-for="Ready_to_rent" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <p>
+        <input type="button" class="button" value="BACK TO PROPERTY"
+               onclick="location.href='@Url.Action("Index", "Buildings", new {id = Model.BuildingId })'" />
+    </p>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
