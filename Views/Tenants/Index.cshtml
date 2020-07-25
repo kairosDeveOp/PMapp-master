@@ -1,0 +1,48 @@
+﻿@model PMApp.ViewModels.TenantsTabViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<div class="reportHeader">
+    <h1>
+        <img src="~/img/grandmother.jpg" alt="Repair Icon" width="55" height="60" />
+        Tenants
+    </h1>
+</div>
+
+<p>
+    <a class="Create" asp-action="Create">Create New</a>
+</p>
+
+
+<div style="margin-top:50px;">
+    <ul class="nav nav-tabs">
+        <li role="navigation" class="@(Model.ActiveTab == PMApp.ViewModels.Tab.Current ? "active" : string.Empty)">
+            <a asp-route-tabname="Current" asp-controller="Tenants" asp-action="SwitchToTabs">Current</a>
+        </li>
+        <li role="presentation" class="@(Model.ActiveTab == PMApp.ViewModels.Tab.Future ? "active" : string.Empty)">
+            <a asp-route-tabname="Future" asp-action="SwitchToTabs">Future</a>
+        </li>
+        <li role="presentation" class="@(Model.ActiveTab == PMApp.ViewModels.Tab.Past ? "active" : string.Empty)">
+            <a asp-route-tabname="Past" asp-action="SwitchToTabs">Past</a>
+        </li>
+    </ul>
+</div>
+
+@switch (Model.ActiveTab)
+{
+    case PMApp.ViewModels.Tab.Current:
+        @await Component.InvokeAsync("CurrentTenants");
+        break;
+    case PMApp.ViewModels.Tab.Future:
+        @await Component.InvokeAsync("FutureTenants");
+        break;
+    case PMApp.ViewModels.Tab.Past:
+        @await Component.InvokeAsync("PastTenants");
+        break;
+    default:
+        break;
+}
+
